@@ -6,6 +6,8 @@ from tokenizers import normalizers
 from tokenizers.normalizers import Strip, Lowercase, NFD, StripAccents
 from tokenizers.processors import TemplateProcessing, BertProcessing
 
+from tokompiler import Tokompiler
+
 import pickle
 import os
 import logging
@@ -350,6 +352,20 @@ class Vocab(object):
         if self.ignore_case:
             item = item.lower()
         return True if self.tokenizer.token_to_id(item) else False
+
+
+def TokompilerVocab(Vocab):
+    def __init__(vocab_path):
+        self.tokenizer = Tokompiler(vocab_path)
+
+    def get_vocab(self):
+        """ Returns object that has .items() field """
+    
+    def get_vocab_size(self):
+
+    def token_to_id(self, token):
+
+    def decode_batch(self, batch: List[List[int]], skip_special_tokens=True) -> List[str]:
 
 
 def load_vocab(vocab_root, name) -> Vocab:
